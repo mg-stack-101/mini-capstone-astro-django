@@ -1,5 +1,20 @@
 {
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Proxy-Config",
+          "value": "render-api-v2"
+        }
+      ]
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/api/csrf/",
+      "destination": "https://mini-capstone-astro-django.onrender.com/api/csrf/"
+    },
     {
       "source": "/api/:path*",
       "destination": "https://mini-capstone-astro-django.onrender.com/api/:path*"
