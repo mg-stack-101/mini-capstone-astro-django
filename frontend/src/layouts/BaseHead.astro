@@ -1,0 +1,7 @@
+---
+// Backwards-compatible document wrapper for existing imports of BaseHead.
+import BaseLayout from './BaseLayout.astro';
+interface Props { title: string; description?: string; favicon?: string; }
+const { title, description, favicon } = Astro.props;
+---
+<BaseLayout title={title} description={description} favicon={favicon}><slot /></BaseLayout>

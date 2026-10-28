@@ -1,0 +1,23 @@
+<div class="ambient" aria-hidden="true"><div class="ambient-blob"></div><div class="ambient-blob"></div><div class="ambient-blob"></div></div>
+<button type="button" class="motion-toggle" id="motion-toggle" aria-label="Pause background animation" title="Pause background animation" aria-pressed="false">
+  <svg class="motion-pause" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 2h2v8H3zm4 0h2v8H7z"/></svg>
+  <svg class="motion-play" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="m3 1 8 5-8 5z"/></svg>
+</button>
+<script>
+  const root = document.documentElement;
+  const button = document.getElementById('motion-toggle');
+  function updateMotion(paused: boolean) {
+    root.dataset.motion = paused ? 'paused' : 'running';
+    const label = paused ? 'Resume background animation' : 'Pause background animation';
+    button?.setAttribute('aria-label', label);
+    button?.setAttribute('title', label);
+    button?.setAttribute('aria-pressed', String(paused));
+  }
+  try { updateMotion(localStorage.getItem('barangayMotion') === 'paused'); } catch { updateMotion(false); }
+  button?.addEventListener('click', () => {
+    const paused = root.dataset.motion !== 'paused';
+    updateMotion(paused);
+    try { localStorage.setItem('barangayMotion', paused ? 'paused' : 'running'); } catch { /* Preference is optional. */ }
+  });
+  document.addEventListener('visibilitychange', () => { root.dataset.pageHidden = String(document.hidden); });
+</script>

@@ -1,0 +1,23 @@
+---
+import '../styles/global.css';
+import AmbientBackground from '../components/AmbientBackground.astro';
+interface Props { title: string; description?: string; favicon?: string; }
+const { title, favicon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23246b66'/%3E%3Cpath d='m9 16 11-7 11 7H9m3 3v11m8-11v11m8-11v11M9 32h22' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E", description = 'Barangay Complaint Monitoring System — share a concern, track its progress, and build a better community.' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={favicon} />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#246b66" />
+    <meta name="description" content={description} />
+    <title>{title} | Barangay Complaint Monitoring System</title>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div id="app-content"><slot /></div>
+    <AmbientBackground />
+  </body>
+</html>
